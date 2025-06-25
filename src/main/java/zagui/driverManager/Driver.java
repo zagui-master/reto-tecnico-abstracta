@@ -2,6 +2,7 @@ package zagui.driverManager;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.safari.SafariDriver;
 
@@ -18,7 +19,13 @@ public class Driver {
             switch (browser.toLowerCase()) {
                 case "firefox" -> driver = new FirefoxDriver();
                 case "safari" -> driver = new SafariDriver();
-                default -> driver = new ChromeDriver();
+                default -> {
+                    ChromeOptions options = new ChromeOptions();
+                    options.addArguments("--headless=new");
+                    options.addArguments("--disable-gpu");
+                    options.addArguments("--window-size=1920,1080");
+                    driver = new ChromeDriver(options);
+                }
             }
         }
         return driver;
