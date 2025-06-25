@@ -1,0 +1,41 @@
+name: Reto Técnico CI
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  test:
+    name: Ejecutar pruebas y generar reporte Cucumber
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Clonar el repositorio
+        uses: actions/checkout@v4
+
+      - name: Configurar JDK 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: 17
+
+      - name: Dar permisos a Gradle wrapper
+        run: chmod +x gradlew
+
+      - name: Limpiar proyecto
+        run: ./gradlew cleanBeforeTest
+
+      - name: Ejecutar pruebas
+        run: ./gradlew test
+
+      - name: Generar reporte de Cucumber
+        run: ./gradlew generateCucumberReport
+
+      - name: Publicar reporte de pruebas (HTML)
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: Reporte Cucumber
+          path: build/reports/

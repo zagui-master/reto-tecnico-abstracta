@@ -1,0 +1,50 @@
+plugins {
+    id 'java'
+}
+
+group = 'io.github.zagui-master'
+version = '1.0.0'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+// Dependencies for testing
+    testImplementation 'org.junit.jupiter:junit-jupiter-engine:5.10.3'
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.10.3'
+    implementation 'io.cucumber:cucumber-java:7.18.0'
+    testImplementation 'io.cucumber:cucumber-junit:7.18.0'
+    testImplementation 'net.masterthought:cucumber-reporting:5.7.6'
+
+    // Selenium WebDriver dependency
+    implementation 'org.seleniumhq.selenium:selenium-java:4.22.0'
+
+    // Logging dependencies
+    implementation 'org.apache.logging.log4j:log4j-api:2.23.1'
+    implementation 'org.apache.logging.log4j:log4j-core:2.23.1'
+
+    implementation 'io.github.cdimascio:java-dotenv:5.2.2'
+}
+
+tasks.register('cleanBeforeTest', Delete) {
+    delete rootProject.buildDir
+}
+
+tasks.register('generateCucumberReport', JavaExec) {
+    mainClass = 'generateReport/GenerateReport'
+    classpath = sourceSets.test.runtimeClasspath
+
+}
+
+test {
+
+    mustRunAfter cleanBeforeTest
+    useJUnit()
+    systemProperty 'cucumber.filter.tags', System.getProperty('cucumber.filter.tags', '')
+}
+
+
+tasks.named('test') {
+    dependsOn cleanBeforeTest
+}
