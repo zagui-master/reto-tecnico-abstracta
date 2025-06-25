@@ -38,4 +38,4 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: Reporte Cucumber
-          path: build/reports/
+          path: build/cucumber-reports/cucumber-html-reports/cucumber-html-reports/
