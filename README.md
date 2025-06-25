@@ -27,26 +27,34 @@ Framework de automatización de pruebas funcionales para aplicaciones web utiliz
 ## 📁 Estructura del Proyecto
 
 ```
-- src
-    - main
-        - java
-            - zagui
-                - apiZagui
-                    - Page.java
-                - driverManager
-                    - Driver.java
+      src/
+      ├── main/
+      │   └── java/
+      │       └── zagui/
+      │           ├── apiZagui/
+      │           │   └── Page.java
+      │           └── driverManager/
+      │               └── Driver.java
+      └── test/
+      └── java/
+      ├── browserManager/
+      │   └── BrowserManager.java
+      ├── generateReport/
+      │   ├── GenerateReport.java
+      │   └── ScreenshotReport.java
+      ├── pages/
+      │   ├── CartPage.java
+      │   ├── HeaderPage.java
+      │   ├── SearchPage.java
+      │   └── YourStorePage.java
+      ├── runners/
+      │   └── TestRunner.java
+      ├── steps/
+      │   └── CartSteps.java
+      └── resources/
+          └── features/
+            └── opencart_cart.feature
 
-    - test
-        - java
-            - browserManager
-                - BrowserManager.java
-            - generateReport
-                - GenerateReport.java
-                - ScreenshotReport.java
-            - pages
-            - steps
-            - resources
-                - features
 ```
 
 ## ▶️ Ejecutar Pruebas
